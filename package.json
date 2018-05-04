@@ -1,0 +1,29 @@
+{
+  "name": "koa2_autowired_route",
+  "version": "0.0.1",
+  "description": "koa2 util",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EicFoe/Koa2_route_util.git"
+  },
+  "keywords": [
+    "koa2",
+    "autowired"
+  ],
+  "author": "xeon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EicFoe/Koa2_route_util/issues"
+  },
+  "homepage": "https://github.com/EicFoe/Koa2_route_util#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "path": "^0.12.7"
+  }
+}
