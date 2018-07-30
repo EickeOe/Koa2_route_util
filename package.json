@@ -1,6 +1,6 @@
 {
   "name": "koa2_autowired_route",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "koa2 util",
   "main": "index.js",
   "scripts": {
@@ -21,9 +21,8 @@
   },
   "homepage": "https://github.com/EicFoe/Koa2_route_util#readme",
   "dependencies": {
-    "fs": "0.0.1-security",
+    "@types/node": "^10.5.4",
     "koa": "^2.5.2",
-    "koa-router": "^7.4.0",
-    "path": "^0.12.7"
+    "koa-router": "^7.4.0"
   }
 }
