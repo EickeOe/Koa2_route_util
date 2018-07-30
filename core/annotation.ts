@@ -1,4 +1,5 @@
-import {global} from './global-variable'
+import {Global} from './global-variable'
+const global:Global = Global.getGlobal();
 //路由注解
 export const Route = ({ path, type, Interceptors = [] }: { path: string, type?: string, Interceptors?: any[] }) => {
     return (target: any, name: string, value: PropertyDescriptor) => {

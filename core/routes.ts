@@ -2,14 +2,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as Router from 'koa-router';
-import {global} from "./global-variable";
+import { Global } from "./global-variable";
 declare const require: any;
 
 //本工具默认配置
 let config = {
     'scan-path': 'routes',//route存放路径
 };
-
+const global: Global = Global.getGlobal();
 //获取项目根路径
 const getRootPath = (temPath) => {
     while (true) {
@@ -30,7 +30,7 @@ let router: Router = new Router();
 for (let ts of file) {
     let filepath = routesPath + path.sep + ts;
     require(filepath);
-    let loop=(ctrlAttr)=>{
+    let loop = (ctrlAttr) => {
         for (let [config, controller] of global.routes) {
             let controllers = Array.isArray(controller) ? controller : [controller];
             for (let controller of controllers) {

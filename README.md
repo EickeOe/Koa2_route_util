@@ -91,4 +91,6 @@ npm run ts-node ./src/main.ts
 
 ### @Autowired
 
- 
+ ```typescript
+等等补充...
+```

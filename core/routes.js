@@ -15,6 +15,7 @@ const global_variable_1 = require("./global-variable");
 let config = {
     'scan-path': 'routes',
 };
+const global = global_variable_1.Global.getGlobal();
 const getRootPath = (temPath) => {
     while (true) {
         let file = fs.readdirSync(temPath);
@@ -36,12 +37,12 @@ for (let ts of file) {
     let filepath = routesPath + path.sep + ts;
     require(filepath);
     let loop = (ctrlAttr) => {
-        for (let [config, controller] of global_variable_1.global.routes) {
+        for (let [config, controller] of global.routes) {
             let controllers = Array.isArray(controller) ? controller : [controller];
             for (let controller of controllers) {
-                const fInters = global_variable_1.global.funcInterceptors.get(controller.name);
-                router[config.type](`/${global_variable_1.global.ctrls}/${config.path}`, (ctx, next) => __awaiter(this, void 0, void 0, function* () {
-                    const check = global_variable_1.global.ctrlInterceptors.every(interceptor => new interceptor().intercept(ctx, next)) && fInters.every(interceptor => new interceptor().intercept(ctx, next));
+                const fInters = global.funcInterceptors.get(controller.name);
+                router[config.type](`/${global.ctrls}/${config.path}`, (ctx, next) => __awaiter(this, void 0, void 0, function* () {
+                    const check = global.ctrlInterceptors.every(interceptor => new interceptor().intercept(ctx, next)) && fInters.every(interceptor => new interceptor().intercept(ctx, next));
                     if (check) {
                         yield controller.apply(ctrlAttr, [ctx, next]);
                     }
@@ -52,8 +53,8 @@ for (let ts of file) {
             }
         }
     };
-    loop(global_variable_1.global.ctrlAttr);
-    global_variable_1.global.reset();
+    loop(global.ctrlAttr);
+    global.reset();
 }
 exports.default = router;
 //# sourceMappingURL=routes.js.map
