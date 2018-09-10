@@ -1,6 +1,6 @@
 {
   "name": "koa2_autowired_route",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "koa2 util",
   "main": "index.js",
   "scripts": {

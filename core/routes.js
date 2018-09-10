@@ -14,13 +14,22 @@ const Router = require("koa-router");
 const global_variable_1 = require("./global-variable");
 let config = {
     'scan-path': 'routes',
+    'override': 'override.js'
 };
+exports.config = config;
+let override = (app) => { };
+exports.override = override;
 const global = global_variable_1.Global.getGlobal();
 const getRootPath = (temPath) => {
     while (true) {
         let file = fs.readdirSync(temPath);
         for (let i = 0; i < file.length; i++) {
             if (file[i] === 'route.json') {
+                exports.config = config = Object.assign(config, require(temPath + '/route.json'));
+                const overrideFunc = require(temPath + '/' + config.override);
+                if (typeof overrideFunc === 'function') {
+                    exports.override = override = overrideFunc;
+                }
                 return temPath;
             }
         }
@@ -33,6 +42,7 @@ const getRootPath = (temPath) => {
 let routesPath = getRootPath(path.normalize(path.dirname(require.main.filename))) + path.sep + config['scan-path'];
 const file = fs.readdirSync(routesPath);
 let router = new Router();
+exports.router = router;
 for (let ts of file) {
     let filepath = routesPath + path.sep + ts;
     require(filepath);
@@ -56,5 +66,4 @@ for (let ts of file) {
     loop(global.ctrlAttr);
     global.reset();
 }
-exports.default = router;
 //# sourceMappingURL=routes.js.map

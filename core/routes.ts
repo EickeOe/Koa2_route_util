@@ -8,7 +8,9 @@ declare const require: any;
 //本工具默认配置
 let config = {
     'scan-path': 'routes',//route存放路径
+    'override': 'override.js'
 };
+let override = (app) => { }
 const global: Global = Global.getGlobal();
 //获取项目根路径
 const getRootPath = (temPath) => {
@@ -16,6 +18,11 @@ const getRootPath = (temPath) => {
         let file = fs.readdirSync(temPath);
         for (let i = 0; i < file.length; i++) {
             if (file[i] === 'route.json') {
+                config = Object.assign(config, require(temPath + '/route.json'))
+                const overrideFunc = require(temPath + '/' + config.override)
+                if (typeof overrideFunc === 'function') {
+                    override = overrideFunc
+                }
                 return temPath;
             }
         }
@@ -51,5 +58,4 @@ for (let ts of file) {
     global.reset();
 }
 
-
-export default router;
+export { config, router, override }

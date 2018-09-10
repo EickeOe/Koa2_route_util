@@ -11,5 +11,5 @@ export declare enum TYPE {
     GET = "get",
     POST = "post",
     DELETE = "delete",
-    PUT = "put"
+    PUT = "put",
 }

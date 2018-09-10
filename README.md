@@ -26,6 +26,7 @@ npm install koa2_autowired_route --save
         routes/
             route-demo.ts
         main.ts
+        override.js
         route.json
 ```
 
@@ -38,7 +39,8 @@ app.listen(3000);
 ```json
 //route.json
 {
-  "scan-path":"routes"
+  "scan-path":"routes",
+  "override": "override.js"
 }
 ```
 
@@ -179,6 +181,39 @@ export class RouteDemo {
         // 在浏览器中查看此接口,会输出hello world
         // View in browser this, print helloworld
     }
+}
+```
+
+##	自定义Koa对象
+
+### override.js
+
+你可以在override.js种自定义koa对象,比如自定义请求头等。例：
+
+```javascript
+//override.js
+module.exports = (app) => {
+    app.use(async (ctx, next) => {
+        await next();
+    });
+}
+```
+
+注：如果```override.js```与其他框架的配置文件重叠，可以通过```route.json```来自定义```override.js```文件名。例：
+
+```json
+//route.json
+{
+  "override": "test.js"
+}
+```
+
+```javascript
+//test.js
+module.exports = (app) => {
+    app.use(async (ctx, next) => {
+        await next();
+    });
 }
 ```
 
