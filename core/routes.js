@@ -60,7 +60,10 @@ for (let ts of file) {
                 router[config.type](`/${global.ctrls}/${config.path}`, (ctx, next) => __awaiter(this, void 0, void 0, function* () {
                     const check = global.ctrlInterceptors.every(interceptor => new interceptor().intercept(ctx, next)) && fInters.every(interceptor => new interceptor().intercept(ctx, next));
                     if (check) {
-                        yield controller.apply(ctrlAttr, [ctx, next]);
+                        const response = yield controller.apply(ctrlAttr, [ctx, next]);
+                        if (response) {
+                            ctx.body = response;
+                        }
                     }
                     else {
                         ctx.throw(401, 'server error');
