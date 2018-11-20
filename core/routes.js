@@ -45,7 +45,13 @@ let router = new Router();
 exports.router = router;
 for (let ts of file) {
     let filepath = routesPath + path.sep + ts;
-    require(filepath);
+    const route = require(filepath);
+    let className;
+    for (let name in route) {
+        if (typeof route[name] == 'function') {
+            className = name;
+        }
+    }
     let loop = (ctrlAttr) => {
         for (let [config, controller] of global.routes) {
             let controllers = Array.isArray(controller) ? controller : [controller];
@@ -63,7 +69,7 @@ for (let ts of file) {
             }
         }
     };
-    loop(global.ctrlAttr);
+    loop(global.ctrlAttr[className]);
     global.reset();
 }
 //# sourceMappingURL=routes.js.map

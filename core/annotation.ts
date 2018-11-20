@@ -22,6 +22,18 @@ export interface Interceptor {
 }
 export const Autowired = (func) => {
     return (target: any, name: string, value: PropertyDescriptor) => {
+        if (!global.ctrlAttr[target.constructor.name]) {
+			global.ctrlAttr[target.constructor.name] = {};
+		}
+		global.ctrlAttr[target.constructor.name] = Object.defineProperty(
+			global.ctrlAttr[target.constructor.name],
+			name,
+			{
+				get() {
+					return func();
+				}
+			}
+		);
         global.ctrlAttr[name]=func;
     };
 }

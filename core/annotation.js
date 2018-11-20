@@ -20,6 +20,14 @@ exports.Route = ({ path, type, Interceptors = [] }) => {
 };
 exports.Autowired = (func) => {
     return (target, name, value) => {
+        if (!global.ctrlAttr[target.constructor.name]) {
+            global.ctrlAttr[target.constructor.name] = {};
+        }
+        global.ctrlAttr[target.constructor.name] = Object.defineProperty(global.ctrlAttr[target.constructor.name], name, {
+            get() {
+                return func();
+            }
+        });
         global.ctrlAttr[name] = func;
     };
 };
