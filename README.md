@@ -8,6 +8,11 @@ route  autowired for koa2 implementation .
 - 开箱即用
 - 简单优雅
 
+## 新版特性
+
+- 优化`@Autowired`注入方式
+- 优化接口返回方式
+
 ## 安装
 
 ```bash
@@ -52,7 +57,9 @@ import { Route, TYPE } from 'koa2_autowired_route/core/annotation';
 export class RouteDemo {
     @Route({ path: 'demo', type: TYPE.GET })
     async demo(ctx, next) {
-        ctx.body = { text: 'hello world' };
+        const data = { text: 'hello world' };
+        return data;
+        //or ctx.body = data;
     }
 }
 ```
@@ -177,7 +184,7 @@ export class RouteDemo {
     demoProperty;
     @Route({ path: 'demo', type: TYPE.GET })
     async demo(ctx, next) {
-        ctx.body = this.demoProperty();
+        return this.demoProperty;
         // 在浏览器中查看此接口,会输出hello world
         // View in browser this, print helloworld
     }
@@ -217,3 +224,13 @@ module.exports = (app) => {
 }
 ```
 
+## 缺陷
+
+- 发现的已修复，待发现。。。
+
+## 最后
+
+- 期待你的新需求，需求请发送到 oe52920@gmail.com, 收到后我就会更新啦
+- 你认为这个框架哪里不好用也可以提需求啦，发送到上面的邮箱就好啦
+- 赏个星啦
+- 最后，谢谢各位coder
